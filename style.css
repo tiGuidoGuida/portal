@@ -1,0 +1,80 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+body{
+    /* background: rgb(11,88,96);
+    background: linear-gradient(125deg, rgba(11,88,96,1) 0%, rgba(196,214,217,1) 100%); */
+    background: #2F2F2F;
+    
+
+
+   
+    font-family: "Roboto", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    color: #FFFFFF;
+    }
+
+.card{
+    height: 10rem;
+    color: #FFFFFF;
+    background-color: #7F8C8D;
+}
+
+.card.intranet{
+    background-color: #3498db;
+}
+
+.card.avas{
+    /*background-color: #34495e; */
+background-color: #3d2ba3;
+}
+.card.glpi{
+background-color: #27ae60;
+}
+.card.ramais{
+background-color: #8e44ad;
+}
+.card.sugestao{
+background-color: #f39c12;
+}
+.card.denuncia{
+ background-color: #bf0c0cad;
+}
+
+
+
+.card:hover{
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    background-color: #3d3d3d;
+    filter: brightness(1.2);
+    transition: transform 0.3s;
+   
+}
+
+.avas:hover{
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px #34495e3f;
+    background-color: #34495e3f;
+    filter: brightness(1);
+    
+}
+
+
+
+/* style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);  width: 100%;" */
+
+.unavailable-tag {
+    position: absolute;
+    top: 15px;
+    background-color: rgba(255, 255, 255, 0.884);
+    color: #34495e;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
