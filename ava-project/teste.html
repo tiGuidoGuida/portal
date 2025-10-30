@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./styles/global.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./assets/img/Icone Alpha Navegador.ico">
+
+    <title>Instituto Alpha</title>
+
+</head>
+
+<body>
+    <!-- Botão do Menu Hambúrguer -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="tab-item">
+        <img src="./assets/img/Icone Alpha Navegador.ico" alt="Logo Instituto Alpha" class="tab-logo">
+        <span>Instituto Alpha</span>
+        <button class="close-btn">X</button>
+    </div>
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <ul class="sidebar-menu">
+            <li><a href="./recep.html"><i class="fas fa-concierge-bell"></i> Recepção</a></li>
+            <li><a href="./triagem.html"><i class="fas fa-notes-medical"></i> Triagem</a></li>
+            <li><a href="./med_cli.html"><i class="fas fa-user-md"></i> Atendimento Clínico</a></li>
+            <li><a href="./med.html"><i class="fas fa-pills"></i> Medicação</a></li>
+            <li><a href="./emg.html"><i class="fas fa-ambulance"></i> Emergência</a></li>
+            <li><a href="./med_inf.html"><i class="fas fa-baby"></i> Medicação Infantil</a></li>
+            <li><a href="./obs.html"><i class="fas fa-bed"></i> Observação</a></li>
+            <li><a href="./suporte.html"><i class="fas fa-comments"></i> Suporte</a></li>
+            <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+        </ul>
+    </div>
+
+    <main class="dashboard">
+        <!-- Navbar -->
+        <header>
+            <nav class="navbar">
+                <ul class="navbar-menu d-flex justify-content-center align-items-center gap-3">
+                    <li><a href="dashboard.html" class="nav-link">Painel</a></li>
+                    <li><a href="index.html" class="nav-link">Sair</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Logos -->
+        <div class="top-images-container">
+            <img src="./assets/img/Logo Alpha - HD.png" alt="logo Alpha" class="logo-esquerda">
+            <img src="./assets/img/poa.png" alt="logo POA" class="logo-direita">
+        </div>
+
+        <!-- Serviços -->
+        <section class="servicos">
+            <div class="container">
+                <div class="rows-cards">
+                    <!-- Card 1
+                     <div class="row-card-item" onclick="openModal('FsXwbwjH9MY')">
+                        <div class="video-container">
+                            <img src="https://img.youtube.com/vi/FsXwbwjH9MY/0.jpg" alt="Thumbnail do vídeo">
+                        </div>
+                        <h5 class="card-title">Atendimento Clínico</h5>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="row-card-item" onclick="openModal('_SEtx1ffOPM')">
+                        <div class="video-container">
+                            <img src="https://img.youtube.com/vi/_SEtx1ffOPM/0.jpg" alt="Thumbnail do vídeo">
+                        </div>
+                        <h5 class="card-title">Atestado Médico</h5>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="row-card-item" onclick="openModal('VUzh7IFEJJc')">
+                        <div class="video-container">
+                            <img src="https://img.youtube.com/vi/VUzh7IFEJJc/0.jpg" alt="Thumbnail do vídeo">
+                        </div>
+                        <h5 class="card-title">Evolução Médica</h5>
+                    </div>
+                    <!-- Outros cards seguem o mesmo formato -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <iframe id="modalVideo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Abre o modal e carrega o vídeo
+        function openModal(videoId) {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('modalVideo');
+            iframe.src = `https://www.youtube.com/embed/${videoId}`;
+            modal.style.display = 'block';
+        }
+
+        // Fecha o modal e para o vídeo
+        function closeModal() {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('modalVideo');
+            iframe.src = ''; // Para o vídeo
+            modal.style.display = 'none';
+        }
+
+        // Alternar visibilidade da sidebar
+        const sidebarToggle = document.getElementById("sidebarToggle");
+        const sidebar = document.getElementById("sidebar");
+        sidebarToggle.addEventListener("click", () => {
+            sidebar.classList.toggle("show");
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

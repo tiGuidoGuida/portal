@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova guia anônima</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./dist/css/sugestoes.css">
+</head>
+<body>
+ 
+    <div class="container">
+      <p class="section-description">A CIPA aposta que usar as sugestões dos colaboradores é como dar um incentivo no crescimento da saúde e segurança do trabalho.</p>
+      <h3 class="section-two">Deixe sua Sugestão</h3>
+
+
+        <!-- Seu formulário aqui -->
+        <form action="https://formsubmit.co/cipapoa@alphainstituto.com.br" method="POST"
+        class="" id="contactForm" name="contactForm">
+
+      <div>
+        <textarea class="area" name="Relato do acontecido" id="message" cols="28" placeholder="Escreva sua mensagem aqui" ></textarea>
+      </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary">Enviar em anônimo</button>
+              </div>
+       <input type="hidden" name="_subject" value="Nova mensagem sobre Sugestões Gerais da CIPA">
+       <input type="text" name="_honey" style="display:none">
+       <input type="hidden" name="_captcha" value="false">
+     </form> 
+         
+            
+            
+          
+        
+     
+      
+       
+         
+        
+      
+    </div>
+  
+
+  
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.validate.min.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var textarea = document.getElementById("message");
+      var charCount = document.getElementById("charCount");
+      
+      textarea.addEventListener("input", function() {
+          var remaining =  - textarea.value.length;
+          charCount.textContent = remaining + "";
+
+          // Se o limite for excedido, corta o texto
+          if (remaining < 0) {
+              textarea.value = textarea.value.slice(0, 280);
+              charCount.textContent = "";
+          }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assinatura</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+
+    <link
+      href="./intranet/assets/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles for this template -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="./intranet/assets/dist/css/styles.css" />
+  </head>
+
+  <body style="color: black">
+    <div>
+      <h2 class="text-center">
+        Insira seus dados para criação da assinatura de email
+      </h2>
+      <div class="p-4">
+        <div class="input-group mb-2">
+          <!-- <label class="form-label" for="nomeInput"></label> -->
+          <label class="input-group-text" for="nomeInput">Nome</label>
+          <input
+            class="form-control"
+            type="text"
+            id="nomeInput"
+            placeholder="Insira o nome"
+          />
+          <!-- <label class="form-label" for="cargoInput">Cargo:</label> -->
+          <label class="input-group-text" for="cargoInput">Cargo</label>
+          <input
+            class="form-control"
+            type="text"
+            id="cargoInput"
+            placeholder="Insira o cargo"
+          />
+          <button class="btnPrimary" id="converterBtn">Converter</button>
+        </div>
+      </div>
+
+
+
+
+
+      
+      <div class="assinatura" style="width: 425px">
+        <div
+          style="
+            margin-left: 22%;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 11px;
+            padding-top: 0.5rem;
+            padding-bottom: 1rem;
+          "
+        >
+          <strong id="titulo">Instituto Alpha de Medicina para Saúde</strong>
+        </div>
+
+        <table>
+          <tr
+            style="
+              width: 100%;
+
+              display: flex;
+              align-items: flex-end;
+            "
+          >
+            <td
+              style="
+                font-family: tahoma, arial, verdana;
+                font-size: 11px;
+                text-align: center;
+
+                margin-left: 30px;
+              "
+              valign="top"
+            >
+              <img
+                src="./novembro_azul_blog-1024x717.png"
+                style="height: 88px"
+              />
+            </td>
+            <td
+              style="
+                font-family: tahoma, arial, verdana;
+                font-size: 12px;
+                padding-left: 10px;
+              "
+            >
+              <strong id="nome">Nome Completo</strong>
+              <br />
+
+              <strong id="cargo">Cargo</strong>
+              <br />
+              <strong>P.A. Guido Guida - Poá</strong>
+              <br />
+
+              <strong>Tel.:</strong> (11) 4636-8191
+              <br />
+
+              <strong>CNPJ: </strong>14.512.229/0003-81
+              <br />
+            </td>
+          </tr>
+        </table>
+        <td
+          style="
+            font-family: tahoma, arial, verdana;
+            font-size: 5px;
+            text-align: center;
+          "
+          valign="top"
+        >
+          <img src="./footer.png" style="height: 75px; width: 100%" />
+        </td>
+      </div>
+    </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <h1></h1>
+    <script>
+      document
+        .getElementById('converterBtn')
+        .addEventListener('click', function () {
+          var nomeInput = document.getElementById('nomeInput').value
+          var cargoInput = document.getElementById('cargoInput').value
+          var nomeElement = document.getElementById('nome')
+          var cargoElement = document.getElementById('cargo')
+
+          // Atualiza o nome e o cargo com os valores inseridos nos campos de entrada
+          nomeElement.textContent = nomeInput
+          cargoElement.textContent = cargoInput
+
+          var assinaturaElement = document.querySelector('.assinatura')
+          html2canvas(assinaturaElement, { scale: 1 }).then(function (canvas) {
+            // Define as dimensões desejadas para a imagem gerada
+            canvas.style.width = '462px'
+            canvas.style.height = '194px'
+
+            var imgData = canvas.toDataURL('image/png')
+            var img = new Image()
+            img.src = imgData
+
+            var a = document.createElement('a')
+            a.href = imgData
+            a.download = 'assinatura.png'
+            a.appendChild(img)
+
+            document.body.appendChild(a)
+
+            // Restaura os valores originais de nome e cargo após a conversão
+            nomeElement.textContent = 'Nome Completo'
+            cargoElement.textContent = 'Cargo'
+          })
+        })
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,442 @@
+/* Reset de margens e preenchimentos padrão para todos os elementos */
+* {
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove preenchimentos padrão */
+    box-sizing: border-box; /* Inclui bordas e preenchimentos no cálculo total do tamanho */
+}
+
+/* Estilização do corpo da página */
+body {
+    font-family: 'Poppins', sans-serif; /* Define a fonte principal da página */
+    background: linear-gradient(135deg, #e0eafc, #cfdef3); /* Fundo com gradiente diagonal */
+    color: #333; /* Cor do texto padrão */
+    min-height: 100vh; /* Altura mínima da página para cobrir a tela inteira */
+    overflow-x: hidden; /* Evita rolagem horizontal */
+}
+
+/* Contêiner para o vídeo */
+#video-container {
+    margin-top: 20px; /* Margem superior */
+    width: 100%; /* Largura total */
+    max-width: 560px; /* Largura máxima */
+    height: 315px; /* Altura fixa */
+    display: flex; /* Layout flexível */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+/* Classe para esconder elementos */
+.hidden {
+    display: none; /* Remove o elemento da visualização */
+}
+
+/* Estilo para pré-visualização de vídeo */
+.video-preview {
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    border-radius: 10px; /* Bordas arredondadas */
+}
+
+/* Estilo do modal */
+.modal {
+    display: none; /* Modal escondido por padrão */
+    position: fixed; /* Fixa o modal na tela */
+    z-index: 1000; /* Prioridade alta no empilhamento de elementos */
+    top: 0; /* Alinhado ao topo */
+    left: 0; /* Alinhado à esquerda */
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro com transparência */
+    display: flex; /* Layout flexível */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    animation: fadeIn 0.3s ease-in-out; /* Animação de entrada */
+}
+
+/* Conteúdo do modal */
+.modal-content {
+    position: relative; /* Necessário para posicionar elementos internos */
+    background: #006D77; /* Cor de fundo */
+    padding: 20px; /* Espaçamento interno */
+    width: 90%; /* Largura relativa */
+    max-width: 1100px; /* Largura máxima */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra ao redor */
+    animation: slideUp 0.3s ease-in-out; /* Animação de entrada */
+}
+
+/* Estilo para o iframe dentro do modal */
+.modal-content iframe {
+    width: 100%; /* Largura total */
+    height: 600px; /* Altura fixa */
+    border-radius: 8px; /* Bordas arredondadas */
+}
+
+/* Botão de fechar dentro do modal */
+.close {
+    position: absolute; /* Posicionamento relativo ao modal */
+    top: 10px; /* Margem do topo */
+    right: 15px; /* Margem da direita */
+    font-size: 25px; /* Tamanho da fonte */
+    font-weight: bold; /* Fonte em negrito */
+    color: #ffffff; /* Cor do texto */
+    cursor: pointer; /* Cursor de ponteiro */
+    transition: color 0.3s ease; /* Transição suave na mudança de cor */
+}
+
+/* Estilo para imagens dentro do contêiner de vídeo */
+.video-container img {
+    cursor: pointer; /* Cursor de ponteiro ao passar sobre a imagem */
+    width: 100%; /* Largura total */
+    height: auto; /* Altura proporcional à largura */
+}
+
+/* Sidebar (barra lateral) */
+.sidebar {
+    position: fixed; /* Fixa a barra lateral na tela */
+    top: 0; /* Alinhada ao topo */
+    left: 0; /* Alinhada à esquerda */
+    width: 350px; /* Largura fixa da barra lateral */
+    height: 100vh; /* Altura total da viewport */
+    background-color: #0b5860; /* Cor de fundo da barra */
+    color: white; /* Cor do texto */
+    overflow-y: auto; /* Adiciona rolagem vertical se o conteúdo for maior que a altura */
+    z-index: 1000; /* Prioridade alta no empilhamento de elementos */
+    transition: left 0.3s ease-in-out; /* Transição suave ao exibir/ocultar a barra */
+}
+
+/* Configuração da Sidebar para telas menores */
+@media (max-width: 992px) {
+    .sidebar {
+        left: -350px; /* Esconde a barra lateral deslocando-a para fora da tela */
+    }
+
+    .sidebar.show {
+        left: 0; /* Mostra a barra lateral quando a classe 'show' é adicionada */
+    }
+}
+
+/* Menu dentro da Sidebar */
+.sidebar-menu {
+    list-style-type: none; /* Remove o estilo de lista padrão (marcadores) */
+    padding: 0; /* Remove o preenchimento padrão */
+    margin: 0; /* Remove a margem padrão */
+    display: flex; /* Layout flexível */
+    flex-direction: column; /* Itens organizados em uma coluna */
+    justify-content: center; /* Centraliza verticalmente o menu */
+    height: 100%; /* Altura total do menu */
+}
+
+/* Itens individuais do menu */
+.sidebar-menu li {
+    padding: 15px 20px; /* Espaçamento interno */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Linha separadora semitransparente */
+}
+
+/* Links dentro dos itens do menu */
+.sidebar-menu li a {
+    text-decoration: none; /* Remove o sublinhado padrão dos links */
+    color: white; /* Cor do texto */
+    font-size: 1.6rem; /* Tamanho da fonte */
+    display: flex; /* Layout flexível para alinhar ícones e texto */
+    align-items: center; /* Alinha os elementos verticalmente */
+    gap: 15px; /* Espaço entre ícones e texto */
+    transition: background-color 0.3s ease-in-out; /* Transição suave ao passar o mouse */
+}
+
+/* Efeito hover para os links */
+.sidebar-menu li a:hover {
+    background-color: #1c6f6d; /* Cor de fundo ao passar o mouse */
+}
+
+/* Botão de alternância (Hambúrguer) */
+.sidebar-toggle {
+    position: fixed; /* Fixa o botão na tela */
+    top: 15px; /* Margem superior */
+    left: 15px; /* Margem esquerda */
+    background-color: #0b5860; /* Cor de fundo do botão */
+    color: white; /* Cor do texto */
+    border: none; /* Remove bordas padrão */
+    padding: 10px 15px; /* Espaçamento interno */
+    font-size: 18px; /* Tamanho da fonte */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+    z-index: 2000; /* Prioridade alta no empilhamento */
+    display: none; /* Escondido por padrão */
+}
+
+/* Exibe o botão de alternância em telas menores */
+@media (max-width: 992px) {
+    .sidebar-toggle {
+        display: block; /* Mostra o botão de alternância */
+    }
+}
+
+/* Barra de navegação superior */
+.navbar {
+    background: #0b5860; /* Cor de fundo */
+    padding: 15px; /* Espaçamento interno */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Sombra abaixo da barra */
+    width: 100%; /* Largura total da tela */
+    position: fixed; /* Fixa a barra no topo */
+    top: 0; /* Alinhada ao topo */
+    left: 0; /* Alinhada à esquerda */
+    z-index: 900; /* Prioridade no empilhamento */
+    display: flex; /* Layout flexível */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+}
+
+/* Contêiner dentro da barra de navegação */
+.navbar-container {
+    display: flex; /* Layout flexível */
+    justify-content: center; /* Centraliza horizontalmente os itens */
+    align-items: center; /* Alinha os itens verticalmente */
+    gap: 20px; /* Espaço entre os elementos dentro da barra */
+}
+
+/* Menu da Navbar */
+.navbar-menu {
+    list-style: none; /* Remove os marcadores padrão da lista */
+    margin: 0; /* Remove a margem padrão */
+    padding: 0; /* Remove o preenchimento padrão */
+    display: flex; /* Exibe os itens lado a lado */
+    gap: 20px; /* Espaçamento entre os itens do menu */
+}
+
+/* Links dentro da Navbar */
+.navbar-menu .nav-link {
+    text-decoration: none; /* Remove o sublinhado padrão */
+    color: white; /* Define a cor do texto */
+    font-size: 18px; /* Tamanho da fonte */
+    font-weight: bold; /* Negrito */
+    padding: 10px 15px; /* Espaçamento interno para o link */
+    border-radius: 5px; /* Bordas arredondadas */
+    transition: background-color 0.3s ease; /* Animação suave na mudança de fundo */
+}
+
+/* Efeito hover para os links */
+.navbar-menu .nav-link:hover {
+    background-color: #1c6f6d; /* Fundo do link ao passar o mouse */
+}
+
+/* Conteúdo principal */
+.dashboard {
+    margin-left: 350px; /* Espaçamento para acomodar a Sidebar */
+    padding: 100px 20px 20px; /* Espaçamento interno */
+    transition: margin-left 0.3s ease-in-out; /* Transição suave ao ajustar a margem */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 992px) {
+    .dashboard {
+        margin-left: 0; /* Remove a margem esquerda para telas pequenas */
+    }
+}
+
+/* Seção de cards nos serviços */
+.servicos .rows-cards {
+    display: grid; /* Usa o grid layout para organizar os cards */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajusta automaticamente o número de colunas */
+    gap: 20px; /* Espaçamento entre os cards */
+    padding: 20px; /* Espaçamento interno da seção */
+    margin-top: 300px; /* Margem superior */
+}
+
+/* Estilo individual dos cards */
+.servicos .row-card-item {
+    background: #066a74; /* Cor de fundo */
+    padding: 10px; /* Espaçamento interno */
+    border-radius: 8px; /* Bordas arredondadas */
+    text-align: center; /* Centraliza o texto */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra ao redor do card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animação ao passar o mouse */
+    overflow: hidden; /* Garante que o conteúdo não ultrapasse os limites do card */
+}
+
+/* Efeito hover para os cards */
+.servicos .row-card-item:hover {
+    transform: translateY(-5px); /* Levanta o card */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Intensifica a sombra */
+}
+
+/* Cursor de ponteiro para cards clicáveis */
+.row-card-item {
+    cursor: pointer; /* Indica interatividade */
+    
+}
+/* Estilo para vídeos dentro dos cards */
+.row-card-item video {
+    width: 100%; /* Largura total */
+    height: auto; /* Altura proporcional */
+    border-radius: 10px; /* Bordas arredondadas */
+    margin-bottom: 10px; /* Margem inferior */
+}
+
+/* Título dentro dos cards */
+.row-card-item .card-title {
+    font-size: 1.3rem; /* Tamanho da fonte */
+    font-weight: bold; /* Negrito */
+    color: #f8f9fa; /* Cor do texto */
+    letter-spacing: 1px; /* Espaçamento entre letras */
+    text-transform: uppercase; /* Letras maiúsculas */
+}
+
+/* Estilo para iframes dentro dos cards */
+.servicos .row-card-item iframe {
+    width: 100%; /* Largura total */
+    height: 140px; /* Altura fixa */
+    border-radius: 8px; /* Bordas arredondadas */
+    overflow: hidden; /* Garante que o conteúdo não extrapole */
+}
+
+/* Subtítulos dentro dos cards */
+.servicos .row-card-item h5 {
+    font-size: 1rem; /* Tamanho da fonte */
+    font-weight: bold; /* Negrito */
+    color: white; /* Cor do texto */
+    margin-top: 10px; /* Margem superior */
+}
+
+/* Ajuste de responsividade para o layout dos cards */
+@media (max-width: 992px) {
+    .servicos .rows-cards {
+        grid-template-columns: repeat(3, 1fr); /* 3 colunas em telas médias */
+    }
+}
+
+@media (max-width: 768px) {
+    .servicos .rows-cards {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas pequenas */
+    }
+}
+
+@media (max-width: 576px) {
+    .servicos .rows-cards {
+        grid-template-columns: 1fr; /* 1 coluna em telas muito pequenas */
+    }
+
+    .servicos .row-card-item iframe {
+        height: 120px; /* Reduz a altura do vídeo */
+    }
+}
+
+/* Logos fixas no topo */
+.logo-esquerda, .logo-direita {
+    position: fixed; /* Mantém as logos fixas na tela */
+    max-width: 180px; /* Largura máxima */
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+/* Logo do lado esquerdo */
+.logo-esquerda {
+    top: 148px; /* Distância do topo */
+    left: 450px; /* Distância da esquerda */
+    max-width: 230px; /* Largura máxima maior */
+    mix-blend-mode: multiply; /* Modo de mesclagem para integração com o fundo */
+    z-index: 1000; /* Prioridade alta no empilhamento */
+}
+
+/* Logo do lado direito */
+.logo-direita {
+    top: 140px; /* Distância do topo */
+    right: 100px; /* Distância da direita */
+    max-width: 185px; /* Largura máxima menor */
+    mix-blend-mode: multiply; /* Modo de mesclagem */
+    z-index: 1000; /* Prioridade alta */
+}
+
+/* Responsividade das logos */
+@media (max-width: 768px) {
+    .logo-esquerda, .logo-direita {
+        max-width: 130px; /* Reduz o tamanho em telas menores */
+        display: none; /* Esconde as logos */
+    }
+}
+
+/* Responsividade dos cards */
+@media (max-width: 992px) {
+    .servicos .row-card-item {
+        width: calc(33.33% - 20px); /* 3 cards por linha */
+    }
+}
+
+@media (max-width: 768px) {
+    .servicos .row-card-item {
+        width: calc(50% - 20px); /* 2 cards por linha */
+    }
+}
+
+@media (max-width: 576px) {
+    .servicos .row-card-item {
+        width: 100%; /* 1 card por linha */
+    }
+
+    .row-card-item video {
+        max-height: 150px; /* Altura máxima reduzida */
+    }
+
+    .row-card-item .card-title {
+        font-size: 1rem; /* Tamanho do título menor */
+    }
+}
+
+/* Contêiner da imagem central */
+.center-image-container {
+    position: relative; /* Relativo ao fluxo normal */
+    margin-top: 220px; /* Espaço suficiente abaixo das logos */
+    display: flex; /* Flexbox para alinhamento */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente dentro do contêiner */
+    width: 100%; /* O contêiner ocupa toda a largura */
+    text-align: center; /* Centraliza texto ou outros elementos */
+    padding: 0 10px; /* Adiciona um pequeno espaçamento lateral para telas menores */
+}
+
+/* Estilo da imagem */
+.center-image-container img {
+    max-width: 35%; /* Ajusta a largura da imagem em relação à tela */
+    height: auto; /* Mantém a proporção da imagem */
+    display: block; /* Remove margens desnecessárias */
+    margin: 0 auto; /* Centraliza no contêiner */
+    border-radius: 8px; /* Adiciona bordas arredondadas para suavidade */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Adiciona um leve sombreamento */
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 992px) {
+    .center-image-container {
+        margin-top: 180px; /* Reduz o espaçamento acima em telas médias */
+    }
+
+    .center-image-container img {
+        max-width: 50%; /* Aumenta a largura da imagem em telas médias */
+    }
+}
+
+@media (max-width: 768px) {
+    .center-image-container {
+        margin-top: 150px; /* Ajusta a margem superior para telas pequenas */
+        padding: 0 5px; /* Reduz o padding lateral */
+    }
+
+    .center-image-container img {
+        max-width: 70%; /* Adapta a largura para telas pequenas */
+    }
+}
+
+@media (max-width: 576px) {
+    .center-image-container {
+        margin-top: 120px; /* Reduz ainda mais a margem superior */
+    }
+
+    .center-image-container img {
+        max-width: 90%; /* Quase toda a largura da tela em dispositivos muito pequenos */
+    }
+}
+
+/* Para telas extremamente pequenas (exemplo: celulares antigos) */
+@media (max-width: 400px) {
+    .center-image-container img {
+        max-width: 100%; /* Ocupa toda a largura da tela */
+    }
+}

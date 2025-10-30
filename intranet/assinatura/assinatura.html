@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./logoAlpha.png" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+    crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="./assets/dist/css/stylesAss.css">
+  <link
+    href="./intranet/assets/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Custom styles for this template -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+  />
+  <link rel="stylesheet" href="./stylesAssinatura.css">
+  <title>Assinatura</title>
+</head>
+<body>
+  
+  <div class="container">
+    <!--todo o input -->
+    <div class="input">
+      <div class="imagem">
+        <img src="./logoAlphaMod.png" alt="Logo Alpha" height="50px">
+        <img src="./logoPoa.png" alt="Logo Poa" width="50px">
+      </div>
+
+      <p><b class="title">Formulário de Geração</b></p>
+      <input class="form-control" type="text" id="nomeInput" placeholder="Insira o nome" />
+      <input class="form-control" type="text" id="cargoInput" placeholder="Insira o cargo" />
+      <button class="btn btn-primary" id="converterBtn"><b>Gerar</b></button>
+
+      <div class="contato">
+        <p>Dúvidas, sugestões, ou notificar erros encontrados:
+        </p>
+        <p>Entre em contato : 	(11) 94451-2362</p>
+      </div>
+    </div>
+    <!--Resultado da assinatura e instrução-->
+    <div class="resultado">
+      <div>
+        <p><b class="title">GERAÇÃO DE ASSINATURAS DE E-MAILS</b></p>
+        <p>Este é um sistema que foi desenvolvido com o objetivo de facilitar e padronizar a criação das assinaturas de e-mails para os colaboradores do INSTITUTO ALPHA</p>
+        <p><b class="title">INSTRUÇÕES</b></p>
+        <p>1 - Primeiro insira suas informações no formulário ao lado (nome, cargo)</p>
+        <p>2 - Clique no botão "gerar" e aguarde alguns segundos até que sua assinatura seja gerada e baixada automaticamente como uma imagem em seu navegador.</p>
+        <p>3 - Após a imagem ser baixada, vá nas configurações do seu e-mail e no campo de assinatura insira a imagem baixada.</p>
+      </div>
+      <div>
+        <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+        <script>
+          document.getElementById('converterBtn').addEventListener('click', function () {
+            var nomeInput = document.getElementById('nomeInput').value;
+            var cargoInput = document.getElementById('cargoInput').value;
+            var nomeElement = document.getElementById('nome');
+            var cargoElement = document.getElementById('cargo');
+
+            // Atualiza o nome e o cargo com os valores inseridos nos campos de entrada
+            nomeElement.textContent = nomeInput;
+            cargoElement.textContent = cargoInput;
+
+            var assinaturaElement = document.querySelector('.assinatura');
+            html2canvas(assinaturaElement, { scale: 1 }).then(function (canvas) {
+              // Baixar a imagem gerada
+              var imgData = canvas.toDataURL('image/png');
+              var a = document.createElement('a');
+              a.href = imgData;
+              a.download = 'assinatura.png';
+              a.click();
+
+              // Restaura os valores originais de nome e cargo após a conversão
+              nomeElement.textContent = 'Nome Completo';
+              cargoElement.textContent = 'Cargo';
+            });
+          });
+        </script>
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+          crossorigin="anonymous"
+        ></script>
+      </div>
+      <!--Exemplo da assinatura-->
+      <div class="exemplo">
+        <div class="assinatura" style="width: 425px">
+          <div
+            style="
+              margin-left: 22%;
+              font-family: Verdana, Geneva, Tahoma, sans-serif;
+              font-size: 11px;
+              padding-top: 0.5rem;
+              padding-bottom: 1rem;
+            "
+          >
+            <strong id="titulo">Instituto Alpha de Medicina para Saúde</strong>
+          </div>
+          <table>
+            <tr
+              style="
+                width: 100%;
+                display: flex;
+                align-items: flex-end;
+              "
+            >
+              <td
+                style="
+                  font-family: tahoma, arial, verdana;
+                  font-size: 11px;
+                  text-align: center;
+                  margin-left: 30px;
+                "
+                valign="top"
+              >
+                <img
+                  src="./novembro_azul_blog-1024x717.png"
+                  style="height: 88px"
+                />
+              </td>
+              <td
+                style="
+                  font-family: tahoma, arial, verdana;
+                  font-size: 12px;
+                  padding-left: 10px;
+                "
+              >
+                <strong id="nome">Nome Completo</strong><br />
+                <strong id="cargo">Cargo</strong><br />
+                <strong>P.A. Guido Guida - Poá</strong><br />
+                <strong>Tel.:</strong>(11) 4636-8191<br />
+                <strong>CNPJ: </strong>14.512.229/0003-81<br />
+              </td>
+            </tr>
+          </table>
+          <td
+            style="
+              font-family: tahoma, arial, verdana;
+              font-size: 5px;
+              text-align: center;
+            "
+            valign="top"
+          >
+            <img src="./footer.png" style="height: 75px; width: 100%" />
+          </td>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
