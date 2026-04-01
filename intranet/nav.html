@@ -76,11 +76,6 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a
-                    class="dropdown-item"
-                    aria-current="page"
-                    href="https://notifica.saude.gov.br/login"
-                    target="_blank"
                     >E-Sus</a
                   >
                 </li>
@@ -137,10 +132,10 @@
               <ul class="dropdown-menu">
                 <li>
                   <h5
+                    id="current-month-year"
                     class="dropdown-header text-center"
                     style="color: var(--white); text-transform: uppercase"
                   >
-                    <b>Fevereiro de 2026</b>
                   </h5>
                 </li>
                 <li><hr class="dropdown-divider" /></li>
@@ -148,7 +143,7 @@
                   <a
                     class="dropdown-item"
                     aria-current="page"
-                    href="./assets/escalas/administrativo/TODAS A ESCALAS MARÇO 2026.pdf"
+                    href="./assets/escalas/administrativo/escala adm abril.pdf"
                     target="_blank"
                     >Escala Administrativa
                   </a>
@@ -179,7 +174,7 @@
                   <a
                     class="dropdown-item"
                     aria-current="page"
-                    href="./assets/escalas/medicos/escala medica fevereiro 2026.pdf"
+                    href="./assets/escalas/medicos/escala medica abril.pdf"
                     target="_blank"
                     >Escala Médicos
                     
@@ -317,4 +312,26 @@
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
     crossorigin="anonymous"
   ></script>
+
+  <!-- Script para atualizar mes e ano automaticamente -->
+  <script>
+    function updateMonthYear() {
+      const months = [
+        'Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+      ];
+
+      const today = new Date();
+      const monthName = months[today.getMonth()];
+      const year = today.getFullYear();
+
+      const element = document.getElementById('current-month-year');
+      if (element) {
+        element.innerHTML = '<b>' + monthName + ' de ' + year + '</b>';
+      }
+    }
+
+    // Executar quando o DOM estiver pronto
+    document.addEventListener('DOMContentLoaded', updateMonthYear);
+  </script>
 </html>

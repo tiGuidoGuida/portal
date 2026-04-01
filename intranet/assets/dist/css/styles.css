@@ -180,7 +180,7 @@ article a:hover {
 :root {
   /* Colors  */
   --light: #c3c3c3;
-  --default: #3C0A6D ;
+  --default: #008CC9 ;
   /*Cor novembro azul: #054f77*/
   --defaultHover: #000;
   --white: #fff;
@@ -194,6 +194,7 @@ article a:hover {
 }
 
 /* Cores campanha 
+março roxo = #3C0A6D
 Abril azul = #008CC9
 Maio Marrom = #964b00
 */
