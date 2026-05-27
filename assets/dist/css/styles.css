@@ -1,3 +1,4 @@
+
 .blog-header {
   border-bottom: 1px solid #e5e5e5;
 }
@@ -180,10 +181,10 @@ article a:hover {
 :root {
   /* Colors  */
   --light: #c3c3c3;
-  --default: #964B00 ;
+  --default: #01903F ;
   /*Cor novembro azul: #054f77*/
   --defaultHover: #000;
-  --white: #fff;
+  --white:#F7C501;
   --black: #000;
   --gray-300: #000000;
   --green-100: #c4d6d9;

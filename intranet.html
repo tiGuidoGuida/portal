@@ -48,6 +48,73 @@
   <link href="./assets/dist/css/styles.css" rel="stylesheet" />
 
 </head>
+
+
+
+<!--inicio do codigo mouse--->
+<style>
+
+  /* Remove cursor padrão da página inteira */
+  *{
+    cursor: none !important;
+  }
+
+  /* Cursor normal */
+  .cursor{
+    width: 50px;
+    height: 50px;
+
+    background: url('/img/neymar_left.gif') no-repeat center;
+    background-size: contain;
+
+    position: fixed;
+    pointer-events: none;
+
+    transform: translate(-50%, -50%);
+    z-index: 999999;
+  }
+
+  /* Cursor quando passa em links/botões */
+  .cursor.pointer{
+    background: url('/img/point.png') no-repeat center;
+    background-size: contain;
+  }
+
+</style>
+
+<div class="cursor"></div>
+
+
+<script>
+
+  const cursor = document.querySelector(".cursor");
+
+  // Movimento do cursor
+  document.addEventListener("mousemove", (e) => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+  });
+
+  // Detecta links, botões e elementos clicáveis
+  document.querySelectorAll("a, button").forEach((el) => {
+
+    el.addEventListener("mouseenter", () => {
+      cursor.classList.add("pointer");
+    });
+
+    el.addEventListener("mouseleave", () => {
+      cursor.classList.remove("pointer");
+    });
+
+  });
+
+</script>
+
+<!--fim do codigo mouse--->
+
+
+
+
 <body>
   <!---b-->
   <!-- <div id="video-container">
