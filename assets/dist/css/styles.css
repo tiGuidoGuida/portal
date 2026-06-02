@@ -74,7 +74,7 @@ h6 {
  */
 .blog-footer {
   padding: 2.5rem 0;
-  color: #727272;
+  color: var(--secondary);
   text-align: center;
   background-color: #f9f9f9;
   border-top: 0.05rem solid #e5e5e5;
@@ -99,7 +99,7 @@ h6 {
 
 body {
   padding-top: 1rem;
-  color: var(--gray-300);
+  color: var(--default);
   font-family: 'Roboto', sans-serif;
   background: #FFF7E6;
 background: linear-gradient(175deg, rgba(255,255,255,1) 10%, rgba(228,228,228,1) 57%, rgba(195,195,195,1) 100%);
@@ -181,10 +181,11 @@ article a:hover {
 :root {
   /* Colors  */
   --light: #c3c3c3;
-  --default: #01903F ;
+  --default: #01903F;
+  --secondary: #F7C501;
   /*Cor novembro azul: #054f77*/
   --defaultHover: #000;
-  --white:#F7C501;
+  --white: #000;
   --black: #000;
   --gray-300: #000000;
   --green-100: #c4d6d9;
@@ -310,7 +311,7 @@ Maio Marrom = #964b00
 }
 
 .nav-link {
-  color: var(--white);
+  color: var(--secondary);
 }
 
 .b-example-divider {
@@ -362,7 +363,7 @@ Maio Marrom = #964b00
 
 /* cor das letras do navbar**/
 .header a {
-  color: var(--white);
+  color: var(--secondary);
 
 }
 
@@ -414,7 +415,7 @@ img {
 
 .back-to-top {
   background: var(--green-500);
-  color: var(--white);
+  color: var(--secondary);
 
   position: fixed;
   right: 1rem;
@@ -436,11 +437,11 @@ img {
 
 .back-to-top:hover {
   color: var(--green-500);
-  background: var(--white);
+  background: var(--secondary);
 }
 
 .back-to-top2 {
-  background: var(--white);
+  background: var(--secondary);
   position: fixed;
   right: 0.9rem;
   bottom: 0.9rem;
@@ -516,7 +517,7 @@ img {
 
 .btnPrimary {
   background: var(--default);
-  color: var(--white);
+  color: var(--secondary);
   border: none;
   font-weight: bold;
   transition: background 0.2s;
@@ -533,7 +534,7 @@ img {
 
 .btnPrimary:hover {
   background: var(--default);
-  color: var(--white);
+  color: var(--secondary);
   opacity: 0.6;
 }
 
@@ -541,7 +542,7 @@ img {
 
 #about .card {
   background: var(--default);
-  color: var(--white);
+  color: var(--secondary);
   border: 0;
 }
 
@@ -639,12 +640,12 @@ img {
 
 .back-to-top:hover {
   color: var(--default);
-  background: var(--white);
+  background: var(--secondary);
 }
 
 
 .back-to-top2 {
-  background: var(--white);
+  background: var(--secondary);
   position: fixed;
   right: 0.8rem;
   bottom: 0.8rem;
