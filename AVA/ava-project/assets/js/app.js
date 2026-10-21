@@ -5,7 +5,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   const sectorId = document.body.getAttribute("data-setor") || "home";
-  
+
   // 1. Dicionário de Ícones SVG Críspidos e Leves (Sem dependência de rede)
   const svgIcons = {
     home: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Lógica do Menu Hambúrguer (Mobile)
     const menuToggle = document.getElementById("menu-toggle");
-    
+
     if (menuToggle) {
       menuToggle.addEventListener("click", () => {
         const isOpen = sidebar.classList.toggle("open");
@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.id = "back-to-top";
     btn.setAttribute("aria-label", "Voltar ao topo da página");
     btn.innerHTML = svgIcons["arrow-up"];
-    
+
     document.body.appendChild(btn);
 
     window.addEventListener("scroll", () => {
@@ -287,7 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let videosHTML = "";
       featuredVideos.forEach(v => {
         const ytId = extractYoutubeId(v.youtube);
-        const thumbUrl = ytId 
+        const thumbUrl = ytId
           ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`
           : "assets/img/logo-alpha.png"; // Fallback se URL falhar
 
@@ -388,7 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const sectorVideos = treinamentos[sectorId] || [];
     const categoriesSet = new Set();
-    
+
     // Extrai as categorias únicas
     sectorVideos.forEach(v => {
       if (v.categoria) categoriesSet.add(v.categoria);
@@ -435,9 +435,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Filtrar vídeos por Busca e Categoria
     const filteredVideos = videosList.filter(v => {
       const matchCategory = activeCategory === "Todos" || v.categoria === activeCategory;
-      const matchSearch = activeSearchTerm === "" || 
-        v.titulo.toLowerCase().includes(activeSearchTerm) || 
-        v.descricao.toLowerCase().includes(activeSearchTerm) || 
+      const matchSearch = activeSearchTerm === "" ||
+        v.titulo.toLowerCase().includes(activeSearchTerm) ||
+        v.descricao.toLowerCase().includes(activeSearchTerm) ||
         v.categoria.toLowerCase().includes(activeSearchTerm);
 
       return matchCategory && matchSearch;
@@ -469,7 +469,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (showSkeleton) {
       renderSkeletons(gridContainer, Math.min(3, filteredVideos.length));
-      
+
       // Delay visual de 600ms para carregar
       setTimeout(() => {
         displayCards();
@@ -478,48 +478,75 @@ document.addEventListener("DOMContentLoaded", () => {
       displayCards();
     }
 
+
     function displayCards() {
       let cardsHTML = "";
+
       filteredVideos.forEach(v => {
-        const ytId = extractYoutubeId(v.youtube);
-        const thumbUrl = ytId 
-          ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` 
+        const isFarmacia = sectorId === "farmacia";
+        const videoUrl = isFarmacia
+          ? (v.video || v.youtube || "")
+          : (v.youtube || "");
+
+        const ytId = extractYoutubeId(videoUrl);
+
+        const thumbUrl = ytId
+          ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`
           : "assets/img/logo-alpha.png";
 
+        const thumbnailHTML = isFarmacia && v.video
+          ? `<video
+           class="video-card-thumb"
+           src="${v.video}"
+           muted
+           playsinline
+           preload="metadata"
+           onloadedmetadata="if(this.duration > 1) this.currentTime = 1"
+           style="width:100%;height:100%;object-fit:cover;pointer-events:none;"
+         ></video>`
+          : `<img src="${thumbUrl}" alt="Thumbnail de ${v.titulo}" class="video-card-thumb" loading="lazy">`;
+
         cardsHTML += `
-          <article class="video-card" data-youtube="${v.youtube}" data-title="${v.titulo}" data-category="${v.categoria}" data-desc="${v.descricao}">
-            <div class="video-card-thumb-wrapper">
-              <img src="${thumbUrl}" alt="Thumbnail de ${v.titulo}" class="video-card-thumb" loading="lazy">
-              ${v.destaque ? `<span class="video-card-badge-destaque">${svgIcons.star} Destaque</span>` : ""}
-              <div class="video-card-play-overlay">
-                <div class="video-card-play-btn" aria-hidden="true">${svgIcons.play}</div>
-              </div>
-            </div>
-            <div class="video-card-body">
-              <span class="video-card-category">${v.categoria}</span>
-              <h3 class="video-card-title">${v.titulo}</h3>
-              <p class="video-card-desc">${v.descricao}</p>
-              <button class="video-card-action" aria-label="Assistir treinamento ${v.titulo}">
-                ${svgIcons.play} Assistir treinamento
-              </button>
-            </div>
-          </article>
-        `;
+      <article class="video-card"
+        data-youtube="${videoUrl}"
+        data-title="${v.titulo}"
+        data-category="${v.categoria}"
+        data-desc="${v.descricao}">
+
+        <div class="video-card-thumb-wrapper">
+          ${thumbnailHTML}
+          ${v.destaque ? `<span class="video-card-badge-destaque">${svgIcons.star} Destaque</span>` : ""}
+          <div class="video-card-play-overlay">
+            <div class="video-card-play-btn" aria-hidden="true">${svgIcons.play}</div>
+          </div>
+        </div>
+
+        <div class="video-card-body">
+          <span class="video-card-category">${v.categoria}</span>
+          <h3 class="video-card-title">${v.titulo}</h3>
+          <p class="video-card-desc">${v.descricao}</p>
+          <button class="video-card-action" aria-label="Assistir treinamento ${v.titulo}">
+            ${svgIcons.play} Assistir treinamento
+          </button>
+        </div>
+      </article>
+    `;
       });
+
       gridContainer.innerHTML = cardsHTML;
 
       // Eventos dos cards de vídeo
       attachVideoEvents(gridContainer);
     }
-  }
 
-  /* ==========================================================================
-     SKELETON CARDS GENERATOR
-     ========================================================================== */
-  function renderSkeletons(container, count) {
-    let skeletonsHTML = "";
-    for (let i = 0; i < count; i++) {
-      skeletonsHTML += `
+  }
+    /* ==========================================================================
+       SKELETON CARDS GENERATOR
+       ========================================================================== */
+    function renderSkeletons(container, count) {
+      let skeletonsHTML = "";
+      for (let i = 0; i < count; i++) {
+        skeletonsHTML += `
         <div class="skeleton-card" aria-hidden="true">
           <div class="skeleton-thumb"></div>
           <div class="skeleton-body">
@@ -531,45 +558,45 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
       `;
+      }
+      container.innerHTML = skeletonsHTML;
     }
-    container.innerHTML = skeletonsHTML;
-  }
 
-  /* ==========================================================================
-     MODAL DE VÍDEO COMPACTO E ACESSÍVEL (A11Y)
-     ========================================================================== */
-  function attachVideoEvents(container) {
-    const cards = container.querySelectorAll(".video-card");
-    cards.forEach(card => {
-      card.addEventListener("click", () => {
-        const ytUrl = card.getAttribute("data-youtube") ? card.getAttribute("data-youtube").trim() : "";
-        const title = card.getAttribute("data-title");
-        const category = card.getAttribute("data-category");
-        const desc = card.getAttribute("data-desc");
+    /* ==========================================================================
+       MODAL DE VÍDEO COMPACTO E ACESSÍVEL (A11Y)
+       ========================================================================== */
+    function attachVideoEvents(container) {
+      const cards = container.querySelectorAll(".video-card");
+      cards.forEach(card => {
+        card.addEventListener("click", () => {
+          const ytUrl = card.getAttribute("data-youtube") ? card.getAttribute("data-youtube").trim() : "";
+          const title = card.getAttribute("data-title");
+          const category = card.getAttribute("data-category");
+          const desc = card.getAttribute("data-desc");
 
-        lastFocusedElement = card; // Armazenar foco original para a11y
-        openVideoModal(ytUrl, title, category, desc);
+          lastFocusedElement = card; // Armazenar foco original para a11y
+          openVideoModal(ytUrl, title, category, desc);
+        });
       });
-    });
-  }
-
-  function openVideoModal(url, title, category, desc) {
-    const ytId = extractYoutubeId(url);
-
-    // Criar modal dinamicamente no body para evitar bugs de fluxo
-    let modalOverlay = document.getElementById("video-modal-overlay");
-    if (!modalOverlay) {
-      modalOverlay = document.createElement("div");
-      modalOverlay.id = "video-modal-overlay";
-      modalOverlay.className = "modal-overlay";
-      modalOverlay.setAttribute("role", "dialog");
-      modalOverlay.setAttribute("aria-modal", "true");
-      document.body.appendChild(modalOverlay);
     }
 
-    let modalBodyHTML = "";
-    if (ytId) {
-      modalBodyHTML = `
+    function openVideoModal(url, title, category, desc) {
+      const ytId = extractYoutubeId(url);
+
+      // Criar modal dinamicamente no body para evitar bugs de fluxo
+      let modalOverlay = document.getElementById("video-modal-overlay");
+      if (!modalOverlay) {
+        modalOverlay = document.createElement("div");
+        modalOverlay.id = "video-modal-overlay";
+        modalOverlay.className = "modal-overlay";
+        modalOverlay.setAttribute("role", "dialog");
+        modalOverlay.setAttribute("aria-modal", "true");
+        document.body.appendChild(modalOverlay);
+      }
+
+      let modalBodyHTML = "";
+      if (ytId) {
+        modalBodyHTML = `
         <iframe 
           src="https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -577,9 +604,9 @@ document.addEventListener("DOMContentLoaded", () => {
           title="${title}">
         </iframe>
       `;
-    } else {
-      // Placeholder elegante para vídeos ainda não cadastrados
-      modalBodyHTML = `
+      } else {
+        // Placeholder elegante para vídeos ainda não cadastrados
+        modalBodyHTML = `
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; background: #0f172a; color: #94a3b8; padding: 2rem; text-align: center; gap: 1rem;">
           <div style="color: var(--warning); display: flex; align-items: center; justify-content: center;">
             ${svgIcons["alert-circle"]}
@@ -588,9 +615,9 @@ document.addEventListener("DOMContentLoaded", () => {
           <p style="font-size: 0.9rem; max-width: 420px; line-height: 1.5; margin: 0;">O conteúdo em vídeo e os materiais auxiliares deste módulo estão sendo finalizados pela equipe e estarão disponíveis em breve na plataforma.</p>
         </div>
       `;
-    }
+      }
 
-    modalOverlay.innerHTML = `
+      modalOverlay.innerHTML = `
       <div class="modal-container" id="modal-container">
         <div class="modal-header">
           <div class="modal-title-wrapper">
@@ -610,96 +637,96 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
-    // Exibir o modal com efeito CSS
-    setTimeout(() => {
-      modalOverlay.classList.add("open");
-      const closeBtn = document.getElementById("modal-close-btn");
-      if (closeBtn) closeBtn.focus();
-    }, 50);
-
-    // Lógica para fechar modal
-    const closeBtn = document.getElementById("modal-close-btn");
-    
-    function closeModal() {
-      // Remover a classe open para transição suave de fade out
-      modalOverlay.classList.remove("open");
-      
-      // Destruir o player de vídeo imediatamente para cortar o áudio
-      const iframe = modalOverlay.querySelector("iframe");
-      if (iframe) iframe.remove();
-
-      // Devolver foco ao elemento anterior para navegação por teclado (a11y)
-      if (lastFocusedElement) {
-        lastFocusedElement.focus();
-      }
-
-      // Remover o HTML interno após a animação de encerramento
+      // Exibir o modal com efeito CSS
       setTimeout(() => {
-        modalOverlay.innerHTML = "";
-      }, 300);
+        modalOverlay.classList.add("open");
+        const closeBtn = document.getElementById("modal-close-btn");
+        if (closeBtn) closeBtn.focus();
+      }, 50);
 
-      // Limpar listeners globais do modal
-      document.removeEventListener("keydown", handleKeyDown);
-      modalOverlay.removeEventListener("click", handleOverlayClick);
-    }
+      // Lógica para fechar modal
+      const closeBtn = document.getElementById("modal-close-btn");
 
-    // Fechar ao clicar no botão fechar
-    closeBtn.addEventListener("click", closeModal);
+      function closeModal() {
+        // Remover a classe open para transição suave de fade out
+        modalOverlay.classList.remove("open");
 
-    // Fechar ao pressionar ESC ou fazer Focus Trap
-    function handleKeyDown(e) {
-      if (e.key === "Escape") {
-        closeModal();
+        // Destruir o player de vídeo imediatamente para cortar o áudio
+        const iframe = modalOverlay.querySelector("iframe");
+        if (iframe) iframe.remove();
+
+        // Devolver foco ao elemento anterior para navegação por teclado (a11y)
+        if (lastFocusedElement) {
+          lastFocusedElement.focus();
+        }
+
+        // Remover o HTML interno após a animação de encerramento
+        setTimeout(() => {
+          modalOverlay.innerHTML = "";
+        }, 300);
+
+        // Limpar listeners globais do modal
+        document.removeEventListener("keydown", handleKeyDown);
+        modalOverlay.removeEventListener("click", handleOverlayClick);
       }
-      
-      // Focus Trap
-      if (e.key === "Tab") {
-        const focusableElements = modalOverlay.querySelectorAll('button, [tabindex="0"], iframe');
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
 
-        if (e.shiftKey) { // Se Shift + Tab
-          if (document.activeElement === firstElement) {
-            lastElement.focus();
-            e.preventDefault();
-          }
-        } else { // Se Tab simples
-          if (document.activeElement === lastElement) {
-            firstElement.focus();
-            e.preventDefault();
+      // Fechar ao clicar no botão fechar
+      closeBtn.addEventListener("click", closeModal);
+
+      // Fechar ao pressionar ESC ou fazer Focus Trap
+      function handleKeyDown(e) {
+        if (e.key === "Escape") {
+          closeModal();
+        }
+
+        // Focus Trap
+        if (e.key === "Tab") {
+          const focusableElements = modalOverlay.querySelectorAll('button, [tabindex="0"], iframe');
+          const firstElement = focusableElements[0];
+          const lastElement = focusableElements[focusableElements.length - 1];
+
+          if (e.shiftKey) { // Se Shift + Tab
+            if (document.activeElement === firstElement) {
+              lastElement.focus();
+              e.preventDefault();
+            }
+          } else { // Se Tab simples
+            if (document.activeElement === lastElement) {
+              firstElement.focus();
+              e.preventDefault();
+            }
           }
         }
       }
-    }
 
-    // Fechar clicando fora do modal (Overlay)
-    function handleOverlayClick(e) {
-      const modalContainer = document.getElementById("modal-container");
-      if (modalContainer && !modalContainer.contains(e.target)) {
-        closeModal();
+      // Fechar clicando fora do modal (Overlay)
+      function handleOverlayClick(e) {
+        const modalContainer = document.getElementById("modal-container");
+        if (modalContainer && !modalContainer.contains(e.target)) {
+          closeModal();
+        }
       }
+
+      document.addEventListener("keydown", handleKeyDown);
+      modalOverlay.addEventListener("click", handleOverlayClick);
     }
 
-    document.addEventListener("keydown", handleKeyDown);
-    modalOverlay.addEventListener("click", handleOverlayClick);
-  }
+    /* ==========================================================================
+       HELPERS AUXILIARES
+       ========================================================================== */
 
-  /* ==========================================================================
-     HELPERS AUXILIARES
-     ========================================================================== */
-  
-  // Extrai o código identificador de 11 caracteres de URLs de vídeos do YouTube
-  function extractYoutubeId(url) {
-    if (!url) return null;
-    const cleanUrl = url.trim();
-    
-    // Se o valor fornecido já for diretamente o ID de 11 caracteres do YouTube
-    if (cleanUrl.length === 11 && !cleanUrl.includes('/') && !cleanUrl.includes('.')) {
-      return cleanUrl;
+    // Extrai o código identificador de 11 caracteres de URLs de vídeos do YouTube
+    function extractYoutubeId(url) {
+      if (!url) return null;
+      const cleanUrl = url.trim();
+
+      // Se o valor fornecido já for diretamente o ID de 11 caracteres do YouTube
+      if (cleanUrl.length === 11 && !cleanUrl.includes('/') && !cleanUrl.includes('.')) {
+        return cleanUrl;
+      }
+
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = cleanUrl.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
     }
-    
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    const match = cleanUrl.match(regExp);
-    return (match && match[2].length === 11) ? match[2] : null;
-  }
-});
+  });

@@ -52,6 +52,17 @@ const setoresConfig = {
     descricao: "Dosagens pediátricas por peso, técnicas de abordagem infantil e administração de fármacos.",
     corDestaque: "#0369a1"
   },
+
+  farmacia: {
+    id: "farmacia",
+    nome: "Farmácia",
+    url: "farmacia.html",
+    icone: "syringe",
+    descricao: "Treinamentos e orientações do setor de Farmácia.",
+    corDestaque: "#16a34a"
+  },
+
+
   observacao: {
     id: "observacao",
     nome: "Observação",
@@ -60,6 +71,7 @@ const setoresConfig = {
     descricao: "Monitoramento contínuo de pacientes, evolução de enfermagem e passagens de plantão.",
     corDestaque: "#374151"
   },
+
   suporte: {
     id: "suporte",
     nome: "Suporte",
@@ -202,6 +214,50 @@ const treinamentos = {
       destaque: false
     }
   ],
+  
+farmacia: [
+  {
+    id: 1,
+    titulo: "Cadastro de Produto e Inclusão no Estoque",
+    descricao: "Aprenda a cadastrar produtos e realizar sua inclusão no estoque da farmácia.",
+    categoria: "Estoque",
+    video: "videos/Cadastro_produto_e_inclusão_no_estoque.mp4",
+    destaque: true
+  },
+  {
+    id: 2,
+    titulo: "Dispensação",
+    descricao: "Treinamento sobre o processo de dispensação de medicamentos.",
+    categoria: "Dispensação",
+    video: "videos/DISPENSAÇÃO.mp4",
+    destaque: true
+  },
+  {
+    id: 3,
+    titulo: "Gestão de Compras",
+    descricao: "Orientações sobre o processo de compras e abastecimento da farmácia.",
+    categoria: "Compras",
+    video: "videos/GESTÃO_DE_COMPRAS.mp4",
+    destaque: false
+  },
+  {
+    id: 4,
+    titulo: "Manutenção de Estoque",
+    descricao: "Procedimentos para controle e manutenção do estoque.",
+    categoria: "Estoque",
+    video: "videos/MANUTENÇÃO_DE_ESTOQUE.mp4",
+    destaque: false
+  },
+  {
+    id: 5,
+    titulo: "Movimentação de Estoque",
+    descricao: "Aprenda a registrar e acompanhar as movimentações de estoque.",
+    categoria: "Estoque",
+    video: "videos/MOVIMENTAÇÃO_DE_ESTOQUE.mp4",
+    destaque: false
+  }
+],
+
 
   emergencia: [
     {
